@@ -1,10 +1,11 @@
 version: "3"
 
 services:
-  backend:
-    image: frappe/erpnext:v15.47.3
+  backend: 
+    platform: linux/arm64
+    image: frappe/erpnext:latest
     networks:
-      - frappe_network
+      - frappe_network 
     deploy:
       restart_policy:
         condition: on-failure
@@ -18,7 +19,8 @@ services:
       MARIADB_ROOT_PASSWORD: admin
 
   configurator:
-    image: frappe/erpnext:v15.47.3
+    platform: linux/arm64
+    image: frappe/erpnext:latest
     networks:
       - frappe_network
     deploy:
@@ -47,7 +49,8 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   create-site:
-    image: frappe/erpnext:v15.47.3
+    platform: linux/arm64
+    image: frappe/erpnext:latest
     networks:
       - frappe_network
     deploy:
@@ -80,6 +83,7 @@ services:
         bench new-site --mariadb-user-host-login-scope='%' --admin-password=admin --db-root-username=root --db-root-password=admin --install-app erpnext --set-default frontend;
 
   db:
+    platform: linux/arm64
     image: mariadb:10.6
     networks:
       - frappe_network
@@ -102,7 +106,8 @@ services:
       - db-data:/var/lib/mysql
 
   frontend:
-    image: frappe/erpnext:v15.47.3
+    platform: linux/arm64
+    image: frappe/erpnext:latest
     networks:
       - frappe_network
     depends_on:
@@ -128,7 +133,8 @@ services:
       - "8080:8080"
 
   queue-long:
-    image: frappe/erpnext:v15.47.3
+    platform: linux/arm64
+    image: frappe/erpnext:latest
     networks:
       - frappe_network
     deploy:
@@ -144,7 +150,8 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   queue-short:
-    image: frappe/erpnext:v15.47.3
+    platform: linux/arm64
+    image: frappe/erpnext:latest
     networks:
       - frappe_network
     deploy:
@@ -160,6 +167,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   redis-queue:
+    platform: linux/arm64
     image: redis:6.2-alpine
     networks:
       - frappe_network
@@ -170,6 +178,7 @@ services:
       - redis-queue-data:/data
 
   redis-cache:
+    platform: linux/arm64
     image: redis:6.2-alpine
     networks:
       - frappe_network
@@ -180,7 +189,8 @@ services:
       - redis-cache-data:/data
 
   scheduler:
-    image: frappe/erpnext:v15.47.3
+    platform: linux/arm64
+    image: frappe/erpnext:latest
     networks:
       - frappe_network
     deploy:
@@ -194,7 +204,8 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   websocket:
-    image: frappe/erpnext:v15.47.3
+    platform: linux/arm64
+    image: frappe/erpnext:latest
     networks:
       - frappe_network
     deploy:
